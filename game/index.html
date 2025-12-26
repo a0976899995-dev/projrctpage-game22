@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chains of Change - Tactical Decision Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game-container">
+  
+  <div id="start-screen">
+    <div class="title-container">
+      <h1>Chains of Change</h1>
+      <p>Decisions and Chain Reactions in Geopolitics</p>
+      
+      <div class="main-menu">
+        <div class="menu-item" onclick="startGame()">NEW GAME</div>
+        <div class="menu-item" onclick="loadGame()">LOAD GAME</div>
+        <div class="menu-item" onclick="toggleGallery(true)">GALLERY</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="gallery-overlay" class="hidden">
+    <button class="close-btn" onclick="toggleGallery(false)">CLOSE</button>
+    <div class="gallery-grid">
+      <div class="photo-slot" id="slot-scene1">?</div>
+      <div class="photo-slot" id="slot-scene1_2">?</div>
+      <div class="photo-slot" id="slot-scene1_3">?</div>
+      <div class="photo-slot" id="slot-scene2">?</div>
+      <div class="photo-slot" id="slot-scene2_2">?</div>
+      <div class="photo-slot" id="slot-scene2_3">?</div>
+      <div class="photo-slot" id="slot-scene3">?</div>
+      <div class="photo-slot" id="slot-scene3_2">?</div>
+      <div class="photo-slot" id="slot-scene3_3">?</div>
+    </div>
+  </div>
+
+  <div id="scene-background"></div>
+
+  <div id="status-dashboard">
+    <div class="stat-group">
+      <label class="stat-label">Conflict</label>
+      <div class="progress-bg">
+        <div id="bar-conflict" class="progress-fill red"></div>
+      </div>
+    </div>
+    <div class="stat-group">
+      <label class="stat-label">Communication</label>
+      <div class="progress-bg">
+        <div id="bar-comm" class="progress-fill blue"></div>
+      </div>
+    </div>
+    <div class="stat-group">
+      <label class="stat-label">Impression</label>
+      <div class="progress-bg">
+        <div id="bar-impress" class="progress-fill green"></div>
+      </div>
+    </div>
+  </div>
+
+  <button id="quick-save-btn" onclick="saveGame()">SAVE PROGRESS</button>
+
+  <div id="choices" class="hidden"></div>
+
+  <div id="dialogue-container">
+    <div id="speaker-box">System</div>
+    <div id="dialogue-box">
+      <p id="dialogue-text">Initializing system...</p> 
+      <div class="next-indicator">▶</div>
+    </div>
+  </div>
+
+</div>
+
+<audio id="sfx-click" src="sounds_click.mp3"></audio>
+<audio id="bgm-menu" src="sounds_menu_bgm.mp3" loop></audio>
+<audio id="bgm-game" src="sounds_game_bgm.mp3" loop></audio>
+<audio id="end-perfect" src="end_perfect.mp3"></audio>
+<audio id="end-hard" src="end_hard.mp3"></audio>
+<audio id="end-normal" src="end_normal.mp3"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+/* --- 1. 基礎佈局與字體優化 --- */
+body {
+  font-family: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background-color: #05050a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden; /* 確保遊戲視窗內不會出現多餘捲軸 */
+}
+
+#game-container {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  background-color: #000;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- 2. 首頁封面與標題設定 --- */
+#start-screen {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* 封面背景圖：請確保檔案名稱為 cover.png */
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(10,20,40,0.85)), 
+              url('cover.png') no-repeat center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: opacity 1.5s ease;
+  animation: bgZoom 25s infinite alternate ease-in-out;
+}
+
+@keyframes bgZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+.title-container { text-align: center; margin-top: 100px; }
+
+/* 主標題：Chains of Change */
+.title-container h1 {
+  font-size: 52px; color: #fff; letter-spacing: 8px; margin: 0;
+  text-shadow: 0 0 20px rgba(44, 123, 229, 0.8);
+  animation: titleFadeIn 2.5s forwards;
+}
+
+/* 副標題：改為純白色並優化字體 */
+.title-container p {
+  font-size: 18px;
+  color: #ffffff; /* 設定為純白色 */
+  letter-spacing: 3px;
+  margin-top: 15px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* 白色微光效果 */
+  animation: titleFadeIn 3.5s forwards;
+}
+
+.main-menu { margin-top: 40px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+.menu-item {
+  font-size: 18px; letter-spacing: 3px; color: rgba(255, 255, 255, 0.6);
+  cursor: pointer; transition: all 0.3s; padding: 8px 25px;
+}
+.menu-item:hover { 
+  color: #fff; 
+  text-shadow: 0 0 15px #2c7be5; 
+  transform: scale(1.1); 
+  letter-spacing: 5px; 
+}
+
+/* --- 3. 遊戲內選項：文字置中與彈性版面 --- */
+#choices { 
+  position: absolute; 
+  top: 45%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 80%; 
+  z-index: 20; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+}
+
+#choices button { 
+  background: rgba(10, 20, 40, 0.6); 
+  backdrop-filter: blur(10px); 
+  color: #fff;
+  border: 1px solid rgba(44, 123, 229, 0.5); 
+  padding: 15px 25px; 
+  font-size: 16px; 
+  font-weight: bold; 
+  border-radius: 10px; 
+  cursor: pointer; 
+  transition: all 0.3s ease;
+  text-align: center; /* 選項文字改為置中 */
+  line-height: 1.4;
+  width: 100%;
+}
+
+#choices button:hover { 
+  background: rgba(44, 123, 229, 0.4); 
+  transform: scale(1.02); 
+  box-shadow: 0 0 20px rgba(44, 123, 229, 0.5);
+}
+
+/* --- 4. 狀態儀表板與對話框系統 --- */
+#status-dashboard {
+  position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+  width: 92%; display: flex; justify-content: space-around;
+  background: rgba(10, 20, 40, 0.85); backdrop-filter: blur(12px);
+  padding: 15px; border-radius: 15px; z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.stat-label {
+  display: block; font-size: 11px; font-weight: 900;
+  color: #ffffff; margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+.progress-bg { background: rgba(255, 255, 255, 0.1); border-radius: 10px; height: 8px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; transition: width 0.8s ease-out; }
+.red { background: linear-gradient(90deg, #ff1744, #ff5252); }
+.blue { background: linear-gradient(90deg, #2979ff, #448aff); }
+.green { background: linear-gradient(90deg, #00e676, #69f0ae); }
+
+#scene-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; z-index: 1; transition: background-image 1.5s; }
+
+#dialogue-container { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); width: 92%; z-index: 15; }
+#speaker-box { background: linear-gradient(90deg, #2c7be5, #1a5fc4); color: white; padding: 7px 25px; font-weight: bold; display: inline-block; border-radius: 8px 8px 0 0; font-size: 16px; letter-spacing: 1px; }
+
+/* 對話框：增加點擊提示手勢 */
+#dialogue-box { 
+  background: rgba(10, 15, 30, 0.9); 
+  backdrop-filter: blur(15px); 
+  border: 2px solid #2c7be5; 
+  border-radius: 0 20px 20px 20px; 
+  padding: 25px 35px; 
+  min-height: 95px; 
+  cursor: pointer; 
+  box-shadow: 0 0 30px rgba(44, 123, 229, 0.3); 
+}
+
+#dialogue-text { color: #f0f0f0; font-size: 18px; line-height: 1.6; margin: 0; }
+
+/* 換頁指標：▶ 指標動畫 */
+.next-indicator { 
+  position: absolute; bottom: 12px; right: 25px; 
+  color: #2c7be5; font-size: 24px; 
+  animation: blink 1.2s infinite ease-in-out; 
+  pointer-events: none;
+}
+
+@keyframes blink { 
+  0%, 100% { opacity: 0.2; transform: translateX(0); } 
+  50% { opacity: 1; transform: translateX(5px); } 
+}
+
+/* --- 5. 畫廊與其他控制按鈕 --- */
+#gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 10, 20, 0.98); backdrop-filter: blur(25px); z-index: 200; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.hidden { display: none !important; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 85%; }
+.photo-slot { aspect-ratio: 16/9; background: #111; border: 1px solid #333; border-radius: 12px; background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; color: #333; font-size: 40px; }
+.close-btn { margin-bottom: 30px; background: none; border: 1px solid #fff; color: #fff; padding: 10px 30px; border-radius: 30px; cursor: pointer; transition: 0.3s; }
+.close-btn:hover { background: #fff; color: #000; }
+
+#quick-save-btn { position: absolute; top: 100px; right: 25px; background: rgba(44, 123, 229, 0.15); border: 1px solid rgba(44, 123, 229, 0.5); color: #fff; padding: 6px 15px; border-radius: 20px; font-size: 11px; cursor: pointer; z-index: 50; transition: 0.3s; }
+#quick-save-btn:hover { background: #2c7be5; box-shadow: 0 0 10px #2c7be5; }
+
+@keyframes titleFadeIn { from { opacity: 0; transform: translateY(20px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
